@@ -1,25 +1,55 @@
-#album-wrapper ul {
+#content-wrapper ul {
     width: 100%;
+    padding: 0;
 }
-#album-wrapper ul li {
+#content-wrapper ul li {
     float: left;
     width: 200px;
     overflow: hidden;
     padding: 5px;
     margin: 8px;
     list-style: none;
-    border: 1px #BBB solid;
-    border-radius: 6px;
     text-align: center;
     background: #eee;
     cursor: pointer;
+    border: 1px #BBB solid;
+    border-radius: 6px;
 }
-#album-wrapper ul li:hover {
+#content-wrapper ul li:hover {
     background: #ddd;
 }
-#album-wrapper ul li div.image-block {
+#content-wrapper ul li div.image-block {
     height: 200px;
 }
-#album-wrapper ul li img {
+#content-wrapper ul li img {
     max-width: 200px;
+}
+#content-wrapper .back-link {
+    display: none;
+    margin-left: 15px;
+}
+
+#preview-image {
+    position: fixed;
+    text-align:center;
+    width: 100%;
+    z-index: 10000;
+    display:none;
+    top: 200px;
+    left: 0;
+}
+#preview-image img {
+     border: #FFF 1px solid;
+     border-radius: 6px;
+    max-width: 1000px;
+ }
+#preview-image-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: black;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    opacity: 0.8;
 }

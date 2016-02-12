@@ -2,7 +2,16 @@ app_gallery_homepage:
     path:     /
     defaults: { _controller: AppGalleryBundle:Default:index }
 
-app_gallery_rpcget:
-    path:   /gallery/rpc/
-    defaults: { _controller: AppGalleryBundle:Default:rpcGet }
+app_gallery_albums:
+    path:     /album/{album}
+    defaults: { _controller: AppGalleryBundle:Default:index }
+
+app_gallery_rpc_images_get:
+    path:   /gallery/images/rpc/
+    defaults: { _controller: AppGalleryBundle:Default:rpcGetImages }
+    methods:  [GET]
+
+app_gallery_rpc_albums_get:
+    path:   /gallery/albums/rpc/
+    defaults: { _controller: AppGalleryBundle:Default:rpcGetAlbums }
     methods:  [GET]

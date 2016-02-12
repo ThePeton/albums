@@ -1,6 +1,24 @@
 $(function(){
-    window.pageImages = new ImageCollection();
-    var galleryApp = new AppView({images: window.pageImages});
+    var appRouter = new AppRouter;
+    var galleryView = new AppListView;
+    galleryView.setRouter(appRouter);
 
-    //setTimeout("window.pageImages.reset([{'text' : 'test'}]);", 3000);
+    galleryView.listenTo(appRouter, 'route:index', function(){
+        var pageAlbums = new AlbumCollection();
+        galleryView.clear().setCollection(pageAlbums);
+        galleryView.setBackLink(false);
+    });
+
+    galleryView.listenTo(appRouter, 'route:album', function(albumId, page){
+        if (!page) {
+            page = 1;
+        }
+
+        var pageAlbums = new ImageCollection();
+        galleryView.clear().setCollection(pageAlbums);
+        galleryView.setBackLink(true);
+    });
+
+    Backbone.history.start({pushState: true});
+    //Backbone.history.start();
 });

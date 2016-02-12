@@ -11,7 +11,7 @@ class DefaultController extends Controller
         return $this->render('AppGalleryBundle:Default:index.html.twig');
     }
 
-    public function rpcGetAction(){
+    public function rpcGetImagesAction(){
         $result = [];
 
         for ($i = 1; $i <= 20; $i++){
@@ -19,6 +19,25 @@ class DefaultController extends Controller
                 'id' => $i,
                 'src' => '/upload/gallery/'.$i.'.jpg',
                 'text' => 'Some text '.$i
+            ];
+        }
+
+        return $this->render(
+            'AppGalleryBundle:Default:rpcGet.html.twig',
+            [
+                'dataString' => json_encode($result)
+            ]
+        );
+    }
+
+    public function rpcGetAlbumsAction(){
+        $result = [];
+
+        for ($i = 1; $i <= 5; $i++){
+            $result[] = [
+                'id' => $i,
+                'name' => 'Album name '.$i,
+                'description' => 'Album '.$i.' middle size description'
             ];
         }
 
