@@ -1,0 +1,25 @@
+#album-wrapper ul {
+    width: 100%;
+}
+#album-wrapper ul li {
+    float: left;
+    width: 200px;
+    overflow: hidden;
+    padding: 5px;
+    margin: 8px;
+    list-style: none;
+    border: 1px #BBB solid;
+    border-radius: 6px;
+    text-align: center;
+    background: #eee;
+    cursor: pointer;
+}
+#album-wrapper ul li:hover {
+    background: #ddd;
+}
+#album-wrapper ul li div.image-block {
+    height: 200px;
+}
+#album-wrapper ul li img {
+    max-width: 200px;
+}

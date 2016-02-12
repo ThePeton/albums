@@ -1,3 +1,8 @@
 app_gallery_homepage:
     path:     /
     defaults: { _controller: AppGalleryBundle:Default:index }
+
+app_gallery_rpcget:
+    path:   /gallery/rpc/
+    defaults: { _controller: AppGalleryBundle:Default:rpcGet }
+    methods:  [GET]

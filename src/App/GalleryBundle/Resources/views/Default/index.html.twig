@@ -1,1 +1,21 @@
-Hello World!
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/appgallery/css/gallery.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <div id="album-wrapper">
+        <ul></ul>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+    <script src="{{ asset('bundles/appgallery/js/bower_components/underscore/underscore.js') }}"></script>
+    <script src="{{ asset('bundles/appgallery/js/bower_components/backbone/backbone.js') }}"></script>
+    <script src="{{ asset('bundles/appgallery/js/app.js') }}"></script>
+{% endblock %}
