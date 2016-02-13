@@ -14,8 +14,8 @@ $(function(){
             page = 1;
         }
 
-        var pageAlbums = new ImageCollection();
-        galleryView.clear().setCollection(pageAlbums);
+        var pageAlbums = new ImageCollection;
+        galleryView.clear().setCollection(pageAlbums, { albumId: albumId, page: page});
         galleryView.setBackLink(true);
     });
 

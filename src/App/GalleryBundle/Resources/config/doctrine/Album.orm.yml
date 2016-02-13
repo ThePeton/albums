@@ -1,0 +1,30 @@
+App\GalleryBundle\Entity\Album:
+    type: entity
+    table: null
+    repositoryClass: App\GalleryBundle\Repository\AlbumRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+            nullable: true
+        addDate:
+            type: datetime
+        updateDate:
+            type: datetime
+
+    lifecycleCallbacks: { prePersist: [setCurrentAddDate, setCurrentUpdateDate] }
+
+    oneToMany:
+        images:
+            targetEntity: Image
+            mappedBy: album
+            orderBy:
+                id: ASC

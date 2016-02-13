@@ -2,7 +2,10 @@
 
 namespace App\GalleryBundle\Controller;
 
+use App\GalleryBundle\Repository\AlbumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -11,40 +14,50 @@ class DefaultController extends Controller
         return $this->render('AppGalleryBundle:Default:index.html.twig');
     }
 
-    public function rpcGetImagesAction(){
-        $result = [];
-
-        for ($i = 1; $i <= 20; $i++){
-            $result[] = [
-                'id' => $i,
-                'src' => '/upload/gallery/'.$i.'.jpg',
-                'text' => 'Some text '.$i
-            ];
-        }
+    public function rpcGetAlbumsAction()
+    {
+        /** @var AlbumRepository $albumsRepository */
+        $albumsRepository = $this->getDoctrine()->getRepository('AppGalleryBundle:Album');
+        $albums = $albumsRepository->getAlbumsToView();
 
         return $this->render(
             'AppGalleryBundle:Default:rpcGet.html.twig',
             [
-                'dataString' => json_encode($result)
+                'dataString' => json_encode($albums)
             ]
         );
     }
 
-    public function rpcGetAlbumsAction(){
-        $result = [];
+    public function rpcGetImagesAction(Request $request)
+    {
+        $albumId = $request->get('albumId');
+        if (!$albumId) {
+            throw new NotFoundHttpException("Album ID is not specified");
+        }
 
-        for ($i = 1; $i <= 5; $i++){
-            $result[] = [
-                'id' => $i,
-                'name' => 'Album name '.$i,
-                'description' => 'Album '.$i.' middle size description'
+        /** @var AlbumRepository $albumsRepository */
+        $albumsRepository = $this->getDoctrine()->getRepository('AppGalleryBundle:Album');
+        $album = $albumsRepository->getAlbumWithImages($albumId);
+
+        if (!$album) {
+            throw new NotFoundHttpException(
+                sprintf("Not found album with ID %s", $albumId)
+            );
+        }
+
+        $images = [];
+        foreach ($album->getImages()->toArray() as $image) {
+            $images[] = [
+                'id' => $image->getId(),
+                'src' => $image->getSrc(),
+                'description' => $image->getDescription(),
             ];
         }
 
         return $this->render(
             'AppGalleryBundle:Default:rpcGet.html.twig',
             [
-                'dataString' => json_encode($result)
+                'dataString' => json_encode($images)
             ]
         );
     }

@@ -26,11 +26,11 @@ var AppListView = Backbone.View.extend({
         this.$el.find('.back-link').toggle(this.backLink);
     },
 
-    setCollection: function(collection){
+    setCollection: function(collection, fetchOptions){
         this.collection = collection;
         this.listenTo(this.collection, 'add', this.addOne);
         this.listenTo(this.collection, 'reset', this.onReset);
-        this.collection.fetch();
+        this.collection.fetch({data: fetchOptions});
         return this;
     },
 

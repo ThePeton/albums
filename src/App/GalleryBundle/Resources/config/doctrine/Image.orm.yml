@@ -1,0 +1,31 @@
+App\GalleryBundle\Entity\Image:
+    type: entity
+    table: null
+    repositoryClass: App\GalleryBundle\Repository\ImageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        src:
+            type: string
+            length: '500'
+        description:
+            type: text
+            nullable: true
+        addDate:
+            type: datetime
+        updateDate:
+            type: datetime
+
+    lifecycleCallbacks: { prePersist: [setCurrentAddDate, setCurrentUpdateDate] }
+
+    manyToOne:
+        album:
+            targetEntity: Album
+            inversedBy: images
+            joinColumn:
+                name: album_id
+                referencedColumnName: id
