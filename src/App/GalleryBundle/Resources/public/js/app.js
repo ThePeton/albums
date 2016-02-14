@@ -14,11 +14,10 @@ $(function(){
             page = 1;
         }
 
-        var pageAlbums = new ImageCollection;
-        galleryView.clear().setCollection(pageAlbums, { albumId: albumId, page: page});
+        var pageImages = new ImageCollection({albumId: albumId}, {state: {currentPage: parseInt(page)}});
+        galleryView.clear().setCollection(pageImages);
         galleryView.setBackLink(true);
     });
 
     Backbone.history.start({pushState: true});
-    //Backbone.history.start();
 });

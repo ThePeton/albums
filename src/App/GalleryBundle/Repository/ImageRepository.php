@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class ImageRepository extends EntityRepository
 {
+    public function getQueryForPaginatorByAlbumId($albumId)
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.album_id = :albumId')
+            ->setParameter('albumId', $albumId)
+            ->getQuery();
+    }
 }

@@ -24,13 +24,29 @@ var AppListView = Backbone.View.extend({
 
     render: function(){
         this.$el.find('.back-link').toggle(this.backLink);
+
+        //console.log(this.collection.state);
+
+        var paginationTemplate = _.template($('#paging-template').html());
+        this.$el
+            .find('.pagination')
+            .html(paginationTemplate(
+                _.extend(this.collection.state, {link: 'album/' + this.collection.albumId + '/'})
+            ));
+
+        this.$el
+            .find('.pagination a').not('.disabled')
+            .on('click', null, {router: this.router}, function(event){
+                event.data.router.navigate($(this).attr('href'), {trigger: true});
+                return false;
+            });
     },
 
-    setCollection: function(collection, fetchOptions){
+    setCollection: function(collection){
         this.collection = collection;
         this.listenTo(this.collection, 'add', this.addOne);
         this.listenTo(this.collection, 'reset', this.onReset);
-        this.collection.fetch({data: fetchOptions});
+        this.collection.fetch({data: {albumId: this.collection.albumId}, reset: true});
         return this;
     },
 
@@ -53,10 +69,12 @@ var AppListView = Backbone.View.extend({
     onReset: function(){
         this.clear();
         this.addBatch();
+        this.render();
     },
 
     clear: function(){
         this.$el.find('ul > li').remove();
+        this.$el.find('.pagination ul').remove();
         return this;
     },
 

@@ -40,6 +40,11 @@ class Image
     private $album;
 
     /**
+     * @var integer
+     */
+    private $album_id;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -186,5 +191,28 @@ class Image
     public function getAlbum()
     {
         return $this->album;
+    }
+
+    /**
+     * Set album_id
+     *
+     * @param integer $albumId
+     * @return Image
+     */
+    public function setAlbumId($albumId)
+    {
+        $this->album_id = $albumId;
+
+        return $this;
+    }
+
+    /**
+     * Get album_id
+     *
+     * @return integer 
+     */
+    public function getAlbumId()
+    {
+        return $this->album_id;
     }
 }

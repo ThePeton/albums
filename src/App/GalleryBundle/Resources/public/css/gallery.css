@@ -2,7 +2,7 @@
     width: 100%;
     padding: 0;
 }
-#content-wrapper ul li {
+#content-wrapper ul.gallery li {
     float: left;
     width: 200px;
     overflow: hidden;
@@ -15,18 +15,46 @@
     border: 1px #BBB solid;
     border-radius: 6px;
 }
-#content-wrapper ul li:hover {
+#content-wrapper ul.gallery li:hover {
     background: #ddd;
 }
-#content-wrapper ul li div.image-block {
+#content-wrapper ul.gallery li div.image-block {
     height: 200px;
 }
-#content-wrapper ul li img {
+#content-wrapper ul.gallery li img {
     max-width: 200px;
 }
 #content-wrapper .back-link {
     display: none;
     margin-left: 15px;
+    float: left;
+}
+#content-wrapper .pagination {
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+#content-wrapper .pagination ul {
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+#content-wrapper .pagination ul li {
+    display: inline;
+    list-style: none;
+}
+#content-wrapper .pagination ul li a {
+    padding: 10px 15px;
+    border: 1px #BBB solid;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+}
+#content-wrapper .pagination ul li a.active {
+    background: #eee;
+}
+#content-wrapper .pagination ul li a:hover {
+    background: #eee;
 }
 
 #preview-image {
@@ -52,4 +80,8 @@
     background-color: black;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
     opacity: 0.8;
+}
+
+.clear {
+    clear: both;
 }

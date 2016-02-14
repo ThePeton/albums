@@ -7,7 +7,9 @@
 {% block body %}
     <div id="content-wrapper">
         <div class="back-link"><a href="javascript:void(0);"><<< Back to albums</a></div>
-        <ul></ul>
+        <div class="pagination"></div>
+        <div class="clear"></div>
+        <ul class="gallery"></ul>
     </div>
 
     <div id="preview-image-overlay"></div>
@@ -21,6 +23,7 @@
 
     <script src="{{ asset('bundles/appgallery/js/bower_components/underscore/underscore.js') }}"></script>
     <script src="{{ asset('bundles/appgallery/js/bower_components/backbone/backbone.js') }}"></script>
+    <script src="{{ asset('bundles/appgallery/js/bower_components/backbone.paginator/lib/backbone.paginator.js') }}"></script>
 
     <script src="{{ asset('bundles/appgallery/js/models/image.js') }}"></script>
     <script src="{{ asset('bundles/appgallery/js/models/album.js') }}"></script>
@@ -31,4 +34,26 @@
     <script src="{{ asset('bundles/appgallery/js/routers/appRouter.js') }}"></script>
     <script src="{{ asset('bundles/appgallery/js/views/appListView.js') }}"></script>
     <script src="{{ asset('bundles/appgallery/js/app.js') }}"></script>
+
+    <script id="paging-template" type="text/template">
+        <% if (totalPages > 1){ %>
+        <ul>
+            <% if (currentPage > 3 && totalPages > 6) { %>
+                <li><a href="<%= link %>1">1</a></li>
+                <li class="disabled"><a href="#">...</a></li>
+            <% } %>
+
+            <% for (var i = Math.max(currentPage - 2, 1); i <= Math.min(currentPage + 2, totalPages); i++) { %>
+                <li>
+                    <a href="<%= link %><%= i %>" <% if (currentPage == i) print('class="active"') %> ><%= i %></a>
+                </li>
+            <% } %>
+
+            <% if (currentPage <= (totalPages - 3) && totalPages > 6) { %>
+                <li class="disabled"><a href="#">...</a></li>
+                <li><a href="<%= link %><%= totalPages %>"><%= totalPages %></a></li>
+            <% } %>
+        </ul>
+        <% } %>
+    </script>
 {% endblock %}

@@ -1,4 +1,4 @@
-var ImageCollection = Backbone.Collection.extend({
+var ImageCollection = Backbone.PageableCollection.extend({
 
     model: Image,
 
@@ -6,16 +6,22 @@ var ImageCollection = Backbone.Collection.extend({
 
     albumId: null,
 
-    page: 1,
-
     initialize: function(options){
         if (options && options.albumId) {
             this.albumId = options.albumId;
         }
+    },
 
-        if (options && options.page) {
-            this.page = options.page;
-        }
+    state: {
+        firstPage: 1,
+        pageSize: 10
+    },
+
+    queryParams: {
+        currentPage: "page",
+        pageSize: "onPage",
+        totalPages: "pageCount",
+        totalRecords: "total"
     }
 
 });

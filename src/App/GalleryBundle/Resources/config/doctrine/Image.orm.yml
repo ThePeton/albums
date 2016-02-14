@@ -19,6 +19,8 @@ App\GalleryBundle\Entity\Image:
             type: datetime
         updateDate:
             type: datetime
+        album_id:
+            type: integer
 
     lifecycleCallbacks: { prePersist: [setCurrentAddDate, setCurrentUpdateDate] }
 
