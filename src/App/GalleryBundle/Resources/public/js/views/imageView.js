@@ -19,7 +19,8 @@ var ImageView = Backbone.View.extend({
     },
 
     render: function(){
-        this.$el.html('<div class="image-block"><img src="'+this.model.get('src')+'"><\/div><p>'+this.model.get('text')+'</p>');
+        var template = _.template($('#template-image').html());
+        this.$el.html(template({src: this.model.get('src'), description: this.model.get('description')}));
         return this;
     }
 

@@ -6,7 +6,7 @@
 
 {% block body %}
     <div id="content-wrapper">
-        <div class="back-link"><a href="javascript:void(0);"><<< Back to albums</a></div>
+        <div class="back-link"><a href="/"><<< Back to albums</a></div>
         <div class="pagination"></div>
         <div class="clear"></div>
         <ul class="gallery"></ul>
@@ -32,15 +32,25 @@
     <script src="{{ asset('bundles/appgallery/js/views/imageView.js') }}"></script>
     <script src="{{ asset('bundles/appgallery/js/views/albumView.js') }}"></script>
     <script src="{{ asset('bundles/appgallery/js/routers/appRouter.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/views/appListView.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/app.js') }}"></script>
+    <script src="{{ asset('bundles/appgallery/js/views/AppGalleryView.js') }}"></script>
+    <script src="{{ asset('bundles/appgallery/js/controllers/galleryController.js') }}"></script>
+    <script src="{{ asset('bundles/appgallery/js/galleryApplication.js') }}"></script>
+    <script src="{{ asset('bundles/appgallery/js/main.js') }}"></script>
 
-    <script id="paging-template" type="text/template">
+    <script id="template-album" type="text/template">
+        <h2><%= name %></h2><p><%= description %></p>
+    </script>
+
+    <script id="template-image" type="text/template">
+        <div class="image-block"><img src="<%= src %>"></div><p><%= description %></p>
+    </script>
+
+    <script id="template-pagination" type="text/template">
         <% if (totalPages > 1){ %>
         <ul>
             <% if (currentPage > 3 && totalPages > 6) { %>
                 <li><a href="<%= link %>1">1</a></li>
-                <li class="disabled"><a href="#">...</a></li>
+                <li class="disabled">...</li>
             <% } %>
 
             <% for (var i = Math.max(currentPage - 2, 1); i <= Math.min(currentPage + 2, totalPages); i++) { %>
@@ -50,7 +60,7 @@
             <% } %>
 
             <% if (currentPage <= (totalPages - 3) && totalPages > 6) { %>
-                <li class="disabled"><a href="#">...</a></li>
+                <li class="disabled">...</li>
                 <li><a href="<%= link %><%= totalPages %>"><%= totalPages %></a></li>
             <% } %>
         </ul>

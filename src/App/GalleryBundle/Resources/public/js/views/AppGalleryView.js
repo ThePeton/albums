@@ -1,4 +1,4 @@
-var AppListView = Backbone.View.extend({
+var AppGalleryView = Backbone.View.extend({
 
     el: $('#content-wrapper'),
 
@@ -9,7 +9,8 @@ var AppListView = Backbone.View.extend({
     backLink: false,
 
     events: {
-        'click .back-link' : 'navigateTop'
+        'click a' : 'navigateLink',
+        'click li' : 'navigateListItem'
     },
 
     initialize: function(options){
@@ -25,21 +26,12 @@ var AppListView = Backbone.View.extend({
     render: function(){
         this.$el.find('.back-link').toggle(this.backLink);
 
-        //console.log(this.collection.state);
-
-        var paginationTemplate = _.template($('#paging-template').html());
+        var paginationTemplate = _.template($('#template-pagination').html());
         this.$el
             .find('.pagination')
             .html(paginationTemplate(
                 _.extend(this.collection.state, {link: 'album/' + this.collection.albumId + '/'})
             ));
-
-        this.$el
-            .find('.pagination a').not('.disabled')
-            .on('click', null, {router: this.router}, function(event){
-                event.data.router.navigate($(this).attr('href'), {trigger: true});
-                return false;
-            });
     },
 
     setCollection: function(collection){
@@ -54,9 +46,7 @@ var AppListView = Backbone.View.extend({
         if (modelItem.type == 'image') {
             var newElement = new ImageView({model: modelItem}).render().el;
         } else if (modelItem.type == 'album') {
-            var newElement = new AlbumView({model: modelItem})
-                .setRouter(this.router)
-                .render().el;
+            var newElement = new AlbumView({model: modelItem}).render().el;
         }
 
         this.$el.find('ul').append(newElement);
@@ -89,8 +79,17 @@ var AppListView = Backbone.View.extend({
         return this;
     },
 
-    navigateTop: function(){
-        this.router.navigate('', {trigger: true});
+    navigateLink: function(){
+        this.router.navigate($(event.target).attr('href'), {trigger: true});
+        return false;
+    },
+
+    navigateListItem: function(event){
+        var targetHref = $(event.currentTarget).data('href');
+        if (targetHref) {
+            this.router.navigate(targetHref, {trigger: true});
+            return false;
+        }
     }
 
 });
