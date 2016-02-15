@@ -1,16 +1,31 @@
-var GalleryApplication = function(){
-    this.router = null;
-    this.view = null;
-    this.controller = null;
+define([
+    'jquery',
+    'backbone',
+    'gallery/routers/appRouter',
+    'gallery/views/galleryView',
+    'gallery/controllers/galleryController'
+], function(
+    $,
+    Backbone,
+    AppRouter,
+    GalleryView,
+    GalleryController
+){
 
-    this.start = function(){
-        this.router = new AppRouter;
+    return {
+        router: null,
+        view: null,
+        controller: null,
 
-        this.view = new AppGalleryView;
-        this.view.setRouter(this.router);
+        start: function(){
+            this.router = new AppRouter;
 
-        this.controller = new GalleryController(this.view, this.router);
+            this.view = new GalleryView;
+            this.view.setRouter(this.router);
 
-        Backbone.history.start({pushState: true});
+            this.controller = new GalleryController(this.view, this.router);
+
+            Backbone.history.start({pushState: true});
+        }
     }
-}
+});

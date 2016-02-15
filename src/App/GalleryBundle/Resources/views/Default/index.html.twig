@@ -19,23 +19,7 @@
 {% block javascripts %}
     {{ parent() }}
 
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-
-    <script src="{{ asset('bundles/appgallery/js/bower_components/underscore/underscore.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/bower_components/backbone/backbone.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/bower_components/backbone.paginator/lib/backbone.paginator.js') }}"></script>
-
-    <script src="{{ asset('bundles/appgallery/js/models/image.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/models/album.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/collections/imageCollection.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/collections/albumCollection.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/views/imageView.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/views/albumView.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/routers/appRouter.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/views/AppGalleryView.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/controllers/galleryController.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/galleryApplication.js') }}"></script>
-    <script src="{{ asset('bundles/appgallery/js/main.js') }}"></script>
+    <script src="{{ asset('bundles/appfront/js/bower_components/requirejs/require.js') }}" data-main="{{ asset('bundles/appfront/js/main') }}"></script>
 
     <script id="template-album" type="text/template">
         <h2><%= name %></h2><p><%= description %></p>

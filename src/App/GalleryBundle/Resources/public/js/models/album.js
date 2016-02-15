@@ -1,10 +1,12 @@
-var Album = Backbone.Model.extend({
+define(['backbone'], function(Backbone){
+    return Backbone.Model.extend({
 
-    type: 'album',
+        type: 'album',
 
-    defaults: {
-        name: '(empty)',
-        order: 0
-    }
+        defaults: {
+            name: '(empty)',
+            order: 0
+        }
 
+    });
 });

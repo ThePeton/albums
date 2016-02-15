@@ -1,21 +1,31 @@
-var GalleryController = function(view, router){
+define([
+    'gallery/collections/albumCollection',
+    'gallery/collections/imageCollection'
+], function(
+    AlbumCollection,
+    ImageCollection
+){
 
-    this.index = function(){
-        var pageAlbums = new AlbumCollection();
-        view.clear().setCollection(pageAlbums);
-        view.setBackLink(false);
-    };
+    return function(view, router){
 
-    this.album = function(albumId, page){
-        if (!page) {
-            page = 1;
-        }
+        index = function(){
+            var pageAlbums = new AlbumCollection();
+            view.clear().setCollection(pageAlbums);
+            view.setBackLink(false);
+        };
 
-        var pageImages = new ImageCollection({albumId: albumId}, {state: {currentPage: parseInt(page)}});
-        view.clear().setCollection(pageImages);
-        view.setBackLink(true);
-    };
+        album = function(albumId, page){
+            if (!page) {
+                page = 1;
+            }
 
-    view.listenTo(router, 'route:index', this.index);
-    view.listenTo(router, 'route:album', this.album);
-}
+            var pageImages = new ImageCollection({albumId: albumId}, {state: {currentPage: parseInt(page)}});
+            view.clear().setCollection(pageImages);
+            view.setBackLink(true);
+        };
+
+        view.listenTo(router, 'route:index', index);
+        view.listenTo(router, 'route:album', album);
+
+    }
+});

@@ -1,16 +1,18 @@
-var AppRouter = Backbone.Router.extend({
+define(['backbone'], function(Backbone){
+    return Backbone.Router.extend({
 
-    routes: {
-        "":                  "index",
-        "album/:id":         "album",
-        "album/:id/:page":   "album"
-    },
+        routes: {
+            "":                  "index",
+            "album/:id":         "album",
+            "album/:id/:page":   "album"
+        },
 
-    index: function(){
-        //
-    },
+        index: function(){
+            //
+        },
 
-    album: function(albumId, page){
-        //
-    }
+        album: function(albumId, page){
+            //
+        }
+    })
 });

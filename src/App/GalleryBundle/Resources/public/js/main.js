@@ -1,4 +1,9 @@
-$(function(){
-    var galleryApp = new GalleryApplication;
+define([
+    'jquery',
+    'gallery/galleryApplication'
+], function(
+    $,
+    galleryApp
+){
     galleryApp.start();
 });
