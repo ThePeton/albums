@@ -11,7 +11,7 @@ define([
 
         tagName: 'div',
 
-        className: 'col-md-3',
+        className: 'col-sm-4 col-md-3 col-lg-3',
 
         initialize: function(){
             this.listenTo(this.model, 'change', this.render);

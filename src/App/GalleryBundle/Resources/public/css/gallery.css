@@ -18,11 +18,19 @@
     max-height: 190px;
 }
 
+#content-wrapper div.gallery div.album-thumbnail {
+    min-width: 210px;
+}
 #content-wrapper div.gallery div.album-thumbnail .preview-images {
-    height: 150px;
+    min-height: 100px;
+}
+@media ( min-width: 768px) and ( max-width: 1200px ) {
+    #content-wrapper div.gallery div.album-thumbnail .preview-images {
+        min-height: 150px;
+    }
 }
 #content-wrapper div.gallery div.album-thumbnail .preview-images .preview-image {
-    float: left;
+    float:left;
     margin: 4px;
     width: 42px;
     height: 42px;

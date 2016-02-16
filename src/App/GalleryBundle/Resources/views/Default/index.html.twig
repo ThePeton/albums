@@ -14,8 +14,8 @@
         </div>
 
         <div class="row">
-            <div class="back-link col-md-3"><a href="/" class="btn btn-default">Back to albums</a></div>
-            <div class="pagination-block col-md-6"></div>
+            <div class="back-link col-xs-4 col-sm-3 col-md-3"><a href="/" class="btn btn-default">Back to albums</a></div>
+            <div class="pagination-block col-xs-8 col-sm-6 col-md-6"></div>
         </div>
 
         <div class="row gallery"></div>
@@ -64,7 +64,7 @@
         <% if (totalPages > 1){ %>
         <ul class="pagination">
             <% if (currentPage > 3 && totalPages > 6) { %>
-                <li><a href="<%= link %>1"></a></li>
+                <li><a href="<%= link %>">1</a></li>
                 <li class="disabled"><a>...</a></li>
             <% } %>
 
