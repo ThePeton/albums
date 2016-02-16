@@ -1,61 +1,37 @@
-#content-wrapper ul {
-    width: 100%;
-    padding: 0;
-}
-#content-wrapper ul.gallery li {
-    float: left;
-    width: 200px;
-    overflow: hidden;
-    padding: 5px;
-    margin: 8px;
-    list-style: none;
-    text-align: center;
-    background: #eee;
+#content-wrapper div.gallery img {
     cursor: pointer;
-    border: 1px #BBB solid;
-    border-radius: 6px;
 }
-#content-wrapper ul.gallery li:hover {
+
+#content-wrapper div.gallery div.thumbnail{
+    cursor: pointer;
+    text-align: center;
+}
+#content-wrapper div.gallery div.thumbnail:hover {
     background: #ddd;
 }
-#content-wrapper ul.gallery li div.image-block {
-    height: 200px;
+
+#content-wrapper div.gallery div.image-thumbnail {
+    min-height: 250px;
 }
-#content-wrapper ul.gallery li img {
-    max-width: 200px;
+
+#content-wrapper div.gallery div.image-thumbnail img {
+    max-height: 190px;
 }
+
 #content-wrapper .back-link {
     display: none;
-    margin-left: 15px;
-    float: left;
+    padding: 20px 0 20px 15px;
 }
-#content-wrapper .pagination {
-    float: left;
+
+#content-wrapper .pagination-block {
     text-align: center;
-    width: 100%;
 }
-#content-wrapper .pagination ul {
-    padding: 0;
-    margin: 0;
-    display: inline;
+
+#content-wrapper footer {
+    margin: 20px 0;
 }
-#content-wrapper .pagination ul li {
-    display: inline;
-    list-style: none;
-}
-#content-wrapper .pagination ul li a {
-    padding: 10px 15px;
-    border: 1px #BBB solid;
-    border-radius: 6px;
-    text-align: center;
-    text-decoration: none;
-}
-#content-wrapper .pagination ul li a.active {
-    background: #eee;
-}
-#content-wrapper .pagination ul li a:hover {
-    background: #eee;
-}
+
+
 
 #preview-image {
     position: fixed;
@@ -80,8 +56,4 @@
     background-color: black;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
     opacity: 0.8;
-}
-
-.clear {
-    clear: both;
 }

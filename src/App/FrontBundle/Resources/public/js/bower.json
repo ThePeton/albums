@@ -20,6 +20,7 @@
     "jquery": "2.*",
     "backbone": "^1.2.3",
     "backbone.paginator": "2.*",
-    "requirejs": "2.*"
+    "requirejs": "2.*",
+    "bootstrap": "3.*"
   }
 }

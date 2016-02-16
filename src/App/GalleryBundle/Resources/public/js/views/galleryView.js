@@ -23,8 +23,8 @@ define([
         backLink: false,
 
         events: {
-            'click a' : 'navigateLink',
-            'click li' : 'navigateListItem'
+            'click a[class!="outer"]' : 'navigateLink',
+            'click .thumbnail' : 'navigateListItem'
         },
 
         initialize: function(options){
@@ -41,8 +41,9 @@ define([
             this.$el.find('.back-link').toggle(this.backLink);
 
             var paginationTemplate = _.template($('#template-pagination').html());
+
             this.$el
-                .find('.pagination')
+                .find('.pagination-block')
                 .html(paginationTemplate(
                     _.extend(this.collection.state, {link: 'album/' + this.collection.albumId + '/'})
                 ));
@@ -63,7 +64,7 @@ define([
                 var newElement = new AlbumView({model: modelItem}).render().el;
             }
 
-            this.$el.find('ul').append(newElement);
+            this.$el.find('.gallery').append(newElement);
         },
 
         addBatch: function(){
@@ -77,8 +78,8 @@ define([
         },
 
         clear: function(){
-            this.$el.find('ul > li').remove();
-            this.$el.find('.pagination ul').remove();
+            this.$el.find('.gallery > div').remove();
+            this.$el.find('.pagination-block ul').remove();
             return this;
         },
 
@@ -93,9 +94,12 @@ define([
             return this;
         },
 
-        navigateLink: function(){
-            this.router.navigate($(event.target).attr('href'), {trigger: true});
-            return false;
+        navigateLink: function(event){
+            var targetHref = $(event.target).attr('href');
+            if (targetHref && targetHref.toString().search('http') !== 0) {
+                this.router.navigate(targetHref, {trigger: true});
+                return false;
+            }
         },
 
         navigateListItem: function(event){

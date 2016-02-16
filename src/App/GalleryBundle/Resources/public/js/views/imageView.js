@@ -9,7 +9,9 @@ define([
 ){
     return Backbone.View.extend({
 
-        tagName: 'li',
+        tagName: 'div',
+
+        className: 'col-md-3',
 
         events: {
             'click' : function(){

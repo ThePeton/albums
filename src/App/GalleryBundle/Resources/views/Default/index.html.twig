@@ -1,15 +1,28 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/appfront/js/bower_components/bootstrap/dist/css/bootstrap.css') }}"
+          xmlns="http://www.w3.org/1999/html"/>
     <link rel="stylesheet" href="{{ asset('bundles/appgallery/css/gallery.css') }}" />
 {% endblock %}
 
 {% block body %}
-    <div id="content-wrapper">
-        <div class="back-link"><a href="/"><<< Back to albums</a></div>
-        <div class="pagination"></div>
-        <div class="clear"></div>
-        <ul class="gallery"></ul>
+    <div id="content-wrapper" class="container">
+        <div class="jumbotron">
+            <h1>Image gallery</h1>
+            <p>Used technologies: Symfony 2.8, Backbone JS</p>
+        </div>
+
+        <div class="row">
+            <div class="back-link col-md-3"><a href="/" class="btn btn-default">Back to albums</a></div>
+            <div class="pagination-block col-md-6"></div>
+        </div>
+
+        <div class="row gallery"></div>
+
+        <footer class="text-center">
+            Code on github: <a href="https://github.com/ThePeton/albums" target="_blank">https://github.com/ThePeton/albums</a>
+        </footer>
     </div>
 
     <div id="preview-image-overlay"></div>
@@ -22,29 +35,39 @@
     <script src="{{ asset('bundles/appfront/js/bower_components/requirejs/require.js') }}" data-main="{{ asset('bundles/appfront/js/main') }}"></script>
 
     <script id="template-album" type="text/template">
-        <h2><%= name %></h2><p><%= description %></p>
+        <div class="thumbnail album-thumbnail">
+            <div class="caption">
+                <h3><%= name %></h3>
+                <p><%= description %></p>
+            </div>
+        </div>
     </script>
 
     <script id="template-image" type="text/template">
-        <div class="image-block"><img src="<%= src %>"></div><p><%= description %></p>
+        <div class="thumbnail image-thumbnail">
+            <img src="<%= src %>" />
+            <div class="caption">
+                <p><%= description %></p>
+            </div>
+        </div>
     </script>
 
     <script id="template-pagination" type="text/template">
         <% if (totalPages > 1){ %>
-        <ul>
+        <ul class="pagination">
             <% if (currentPage > 3 && totalPages > 6) { %>
                 <li><a href="<%= link %>1">1</a></li>
-                <li class="disabled">...</li>
+                <li class="disabled"><a>...</a></li>
             <% } %>
 
             <% for (var i = Math.max(currentPage - 2, 1); i <= Math.min(currentPage + 2, totalPages); i++) { %>
-                <li>
-                    <a href="<%= link %><%= i %>" <% if (currentPage == i) print('class="active"') %> ><%= i %></a>
+                <li <% if (currentPage == i) print('class="active"') %> >
+                    <a href="<%= link %><%= i %>"><%= i %></a>
                 </li>
             <% } %>
 
             <% if (currentPage <= (totalPages - 3) && totalPages > 6) { %>
-                <li class="disabled">...</li>
+                <li class="disabled"><a>...</a></li>
                 <li><a href="<%= link %><%= totalPages %>"><%= totalPages %></a></li>
             <% } %>
         </ul>
