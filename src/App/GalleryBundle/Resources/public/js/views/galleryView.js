@@ -45,7 +45,7 @@ define([
             this.$el
                 .find('.pagination-block')
                 .html(paginationTemplate(
-                    _.extend(this.collection.state, {link: 'album/' + this.collection.albumId + '/'})
+                    _.extend(this.collection.state, {link: 'album/' + this.collection.albumId})
                 ));
         },
 

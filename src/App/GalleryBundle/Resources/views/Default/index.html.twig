@@ -56,13 +56,13 @@
         <% if (totalPages > 1){ %>
         <ul class="pagination">
             <% if (currentPage > 3 && totalPages > 6) { %>
-                <li><a href="<%= link %>1">1</a></li>
+                <li><a href="<%= link %>1"></a></li>
                 <li class="disabled"><a>...</a></li>
             <% } %>
 
             <% for (var i = Math.max(currentPage - 2, 1); i <= Math.min(currentPage + 2, totalPages); i++) { %>
                 <li <% if (currentPage == i) print('class="active"') %> >
-                    <a href="<%= link %><%= i %>"><%= i %></a>
+                    <a href="<%= link %><% if (i > 1){ %>/page/<%= i %><% } %>" ><%= i %></a>
                 </li>
             <% } %>
 

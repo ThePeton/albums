@@ -3,7 +3,11 @@ app_gallery_homepage:
     defaults: { _controller: AppGalleryBundle:Default:index }
 
 app_gallery_albums:
-    path:     /album/{album}/{page}
+    path:     /album/{album}
+    defaults: { _controller: AppGalleryBundle:Default:index }
+
+app_gallery_albums_page:
+    path:     /album/{album}/page/{page}
     defaults: { _controller: AppGalleryBundle:Default:index, page: 1 }
 
 app_gallery_rpc_images_get:
