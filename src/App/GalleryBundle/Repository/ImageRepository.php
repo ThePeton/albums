@@ -19,4 +19,15 @@ class ImageRepository extends EntityRepository
             ->setParameter('albumId', $albumId)
             ->getQuery();
     }
+
+    public function getImagesSrcByAlbumIdAndLimit($albumId, $limit)
+    {
+        return $this->createQueryBuilder('i')
+            ->select('i.src')
+            ->where('i.album_id = :albumId')
+            ->setParameter('albumId', $albumId)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

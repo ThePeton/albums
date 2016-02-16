@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class AlbumRepository extends EntityRepository
 {
-    public function getAlbumsToView()
+    public function getAlbumsAsArray()
     {
         return $this->createQueryBuilder('a')
             ->select('a.id, a.name, a.description')
@@ -21,10 +21,11 @@ class AlbumRepository extends EntityRepository
             ->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
 
-    public function getAlbumWithImages()
+    public function getAlbumById($albumId)
     {
         return $this->createQueryBuilder('a')
-            ->leftJoin('a.images', 'i')
+            ->where('a.id = :id')
+            ->setParameter('id', $albumId)
             ->getQuery()
             ->getResult();
     }

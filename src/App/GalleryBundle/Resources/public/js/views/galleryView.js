@@ -57,7 +57,7 @@ define([
             return this;
         },
 
-         addOne: function(modelItem){
+        addOne: function(modelItem){
             if (modelItem.type == 'image') {
                 var newElement = new ImageView({model: modelItem}).render().el;
             } else if (modelItem.type == 'album') {

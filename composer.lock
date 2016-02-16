@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bfc84105750caa21e85aea87655e30b4",
-    "content-hash": "e4e7614126fbca5f169b5cefa7d7cd28",
+    "hash": "5397613e93218a4892f422bf89505f1e",
+    "content-hash": "a82f9366b29079e8c6fe2e17eb07168a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2348,6 +2348,36 @@
                 "templating"
             ],
             "time": "2016-01-11 14:02:19"
+        },
+        {
+            "name": "zaharia/debug",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/peterzaharia/debug.git",
+                "reference": "7f24b2071c79ad58430892ae101516bc58e8fba8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/peterzaharia/debug/zipball/7f24b2071c79ad58430892ae101516bc58e8fba8",
+                "reference": "7f24b2071c79ad58430892ae101516bc58e8fba8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A list of useful shortcut-function for debugging",
+            "time": "2013-11-08 14:40:39"
         }
     ],
     "packages-dev": [
