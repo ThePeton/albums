@@ -21,12 +21,11 @@ class AlbumRepository extends EntityRepository
             ->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
 
-    public function getAlbumWithImages($albumId)
+    public function getAlbumWithImages()
     {
         return $this->createQueryBuilder('a')
-            ->where('a.id = :albumId')
-            ->setParameter('albumId', $albumId)
+            ->leftJoin('a.images', 'i')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
     }
 }

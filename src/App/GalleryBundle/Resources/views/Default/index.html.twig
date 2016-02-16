@@ -36,6 +36,14 @@
 
     <script id="template-album" type="text/template">
         <div class="thumbnail album-thumbnail">
+            <div class="preview-images">
+                <% for (key in previewImages) { %>
+                    <div class="preview-image">
+                        <img src="<%= previewImages[key] %>" />
+                    </div>
+                <% } %>
+                <div class="clearfix"></div>
+            </div>
             <div class="caption">
                 <h3><%= name %></h3>
                 <p><%= description %></p>

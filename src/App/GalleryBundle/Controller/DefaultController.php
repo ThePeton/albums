@@ -21,12 +21,32 @@ class DefaultController extends Controller
     {
         /** @var AlbumRepository $albumsRepository */
         $albumsRepository = $this->getDoctrine()->getRepository('AppGalleryBundle:Album');
-        $albums = $albumsRepository->getAlbumsToView();
+        $albumsData = $albumsRepository->getAlbumWithImages();
+
+        $result = [];
+        foreach ($albumsData as $albumObj) {
+            $albumArr = [
+                'id' => $albumObj->getId(),
+                'name' => $albumObj->getName(),
+                'description' => $albumObj->getDescription(),
+            ];
+
+            $counter = 1;
+            foreach ($albumObj->getImages() as $image) {
+                $albumArr['previewImages'][] = $image->getSrc();;
+
+                if ($counter++ >= 10) {
+                    break;
+                }
+            }
+
+            $result[] = $albumArr;
+        }
 
         return $this->render(
             'AppGalleryBundle:Default:rpcGet.html.twig',
             [
-                'dataString' => $albums
+                'dataString' => $result
             ]
         );
     }
