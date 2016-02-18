@@ -10,7 +10,9 @@ define([
         childView: AlbumView,
 
         onBeforeRender: function(){
-            this.collection.fetch();
+            if (this.collection.length == 0) {
+                this.collection.fetch();
+            }
         }
 
     });

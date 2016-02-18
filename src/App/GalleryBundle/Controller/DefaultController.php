@@ -2,64 +2,66 @@
 
 namespace App\GalleryBundle\Controller;
 
+use App\GalleryBundle\Manager\Exception\AlbumNotFoundException;
+use App\GalleryBundle\Manager\Exception\WrongPageNumberException;
 use App\GalleryBundle\Manager\ViewDataManager;
-use App\GalleryBundle\Repository\AlbumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
-    {
-        return $this->render('AppGalleryBundle:Default:index.html.twig');
-    }
-
-    public function rpcGetAlbumsAction()
+    public function indexAction($format = '')
     {
         /** @var ViewDataManager $dataManager */
         $dataManager = $this->get('app_gallery.view_data_manager');
-        return $this->render(
-            'AppGalleryBundle:Default:rpcGet.html.twig',
-            [
-                'dataString' => $dataManager->getAlbumsWithPreviewImages()
-            ]
-        );
+        $result = $dataManager->getAlbumsWithPreviewImages();
+
+        if ($format == 'json') {
+            return $this->render(
+                'AppGalleryBundle:Default:rpcGet.html.twig',
+                ['dataString' => $result]
+            );
+        } else {
+            return $this->render(
+                'AppGalleryBundle:Default:index.html.twig',
+                ['albumsData' => $result]
+            );
+        }
     }
 
-    public function rpcGetImagesAction(Request $request)
+    public function imagesAction($albumId, $page, Request $request, $format = '')
     {
-        $albumId = $request->query->getInt('albumId');
-        $page = $request->query->getInt('page', 1);
-
-        if (!$albumId) {
-            throw new NotFoundHttpException("Album ID is not specified");
+        if ($format == 'json') {
+            $albumId = $request->query->getInt('albumId');
+            $page = $request->query->getInt('page', 1);
         }
 
-        /** @var AlbumRepository $albumsRepository */
-        $albumsRepository = $this->getDoctrine()->getRepository('AppGalleryBundle:Album');
-        $album = $albumsRepository->getAlbumById($albumId);
+        /** @var ViewDataManager $dataManager */
+        $dataManager = $this->get('app_gallery.view_data_manager');
 
-        if (!$album) {
+        try {
+            $result = $dataManager->getImagesByAlbumIdAndPage($albumId, $page);
+        } catch (AlbumNotFoundException $ex) {
             throw new NotFoundHttpException(
                 sprintf("Album with ID %s not found", $albumId)
             );
-        }
-
-        $dataManager = $this->get('app_gallery.view_data_manager');
-        $result = $dataManager->getImagesByAlbumIdAndPage($albumId, $page);
-
-        if ($result[0]['pageCount'] < $page) {
+        } catch (WrongPageNumberException $ex) {
             throw new NotFoundHttpException(
                 sprintf("Album page %s not found", $page)
             );
         }
 
-        return $this->render(
-            'AppGalleryBundle:Default:rpcGet.html.twig',
-            [
-                'dataString' => $result
-            ]
-        );
+        if ($format == 'json') {
+            return $this->render(
+                'AppGalleryBundle:Default:rpcGet.html.twig',
+                ['dataString' => $result]
+            );
+        } else {
+            return $this->render(
+                'AppGalleryBundle:Default:index.html.twig',
+                ['imagesData' => $result]
+            );
+        }
     }
 }

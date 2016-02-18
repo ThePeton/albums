@@ -2,6 +2,8 @@
 
 namespace App\GalleryBundle\Manager;
 
+use App\GalleryBundle\Manager\Exception\AlbumNotFoundException;
+use App\GalleryBundle\Manager\Exception\WrongPageNumberException;
 use App\GalleryBundle\Repository\AlbumRepository;
 use App\GalleryBundle\Repository\ImageRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -70,6 +72,14 @@ class ViewDataManager
 
     public function getImagesByAlbumIdAndPage($albumId, $page)
     {
+        /** @var AlbumRepository $albumsRepository */
+        $albumsRepository = $this->doctrine->getRepository('AppGalleryBundle:Album');
+        $album = $albumsRepository->getAlbumById($albumId);
+
+        if (!$album) {
+            throw new AlbumNotFoundException();
+        }
+
         /** @var ImageRepository $albumsRepository */
         $imagesRepository = $this->doctrine->getRepository('AppGalleryBundle:Image');
         $imagesQuery = $imagesRepository->getQueryForPaginatorByAlbumId($albumId);
@@ -77,9 +87,13 @@ class ViewDataManager
         /** @var SlidingPagination $pagination */
         $pagination = $this->paginator->paginate(
             $imagesQuery,
-            $page,
+            intval($page),
             $this->imagesPerPage
         );
+
+        if ($pagination->getPageCount() < $page) {
+            throw new WrongPageNumberException();
+        }
 
         $images = [];
         foreach ($pagination as $image) {
@@ -92,10 +106,12 @@ class ViewDataManager
 
         return [
             [
+                'totalRecords' => $pagination->getTotalItemCount(),
                 'total' => $pagination->getTotalItemCount(),
-                'pageCount' => $pagination->getPageCount(),
-                'page' => $pagination->getCurrentPageNumber(),
-                'onPage' => $this->imagesPerPage
+                'totalPages' => $pagination->getPageCount(),
+                'lastPage' => $pagination->getPageCount(),
+                'currentPage' => $pagination->getCurrentPageNumber(),
+                'pageSize' => $this->imagesPerPage
             ],
             $images
         ];

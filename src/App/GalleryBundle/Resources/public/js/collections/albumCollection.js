@@ -19,9 +19,6 @@ define([
         },
 
         queryParams: {
-            currentPage: "page",
-            pageSize: "onPage",
-            totalPages: "pageCount",
             totalRecords: "total"
         }
     });

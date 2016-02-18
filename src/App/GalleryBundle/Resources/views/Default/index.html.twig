@@ -10,7 +10,7 @@
     <div id="content-wrapper" class="container">
         <div class="jumbotron">
             <h1>Image gallery</h1>
-            <p>Used technologies: Symfony 2.8, Backbone JS</p>
+            <p>Used technologies: Symfony 2.8, Marionette 2.4.4</p>
         </div>
 
         <div id="gallery-wrapper"></div>
@@ -26,6 +26,11 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script type="application/javascript">
+        var defaultAlbumsCollection = {% if albumsData is defined %} {{ albumsData|json_encode|raw  }} {% else %} [] {% endif %};
+        var defaultImagesCollection = {% if imagesData is defined %} {{ imagesData|json_encode|raw  }} {% else %} [] {% endif %};
+    </script>
 
     <script src="{{ asset('bundles/appfront/js/bower_components/requirejs/require.js') }}" data-main="{{ asset('bundles/appfront/js/main') }}"></script>
 

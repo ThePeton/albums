@@ -3,7 +3,7 @@ Images album
 
 Used technologies:
  - Symfony 2.8
- - Backbone.js
+ - Marionette 2.4.4
  - Require JS
 
 Install

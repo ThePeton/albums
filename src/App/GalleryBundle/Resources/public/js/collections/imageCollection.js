@@ -15,7 +15,7 @@ define([
 
         albumId: null,
 
-        initialize: function(options){
+        initialize: function(collection, options){
             if (options && options.albumId) {
                 this.albumId = options.albumId;
             }
@@ -27,9 +27,6 @@ define([
         },
 
         queryParams: {
-            currentPage: "page",
-            pageSize: "onPage",
-            totalPages: "pageCount",
             totalRecords: "total"
         }
 

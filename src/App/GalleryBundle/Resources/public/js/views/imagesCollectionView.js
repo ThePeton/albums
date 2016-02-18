@@ -14,7 +14,16 @@ define([
         childView: ImageView,
 
         initialize: function(){
-            this.collection.fetch({ data: { albumId: this.collection.albumId }, reset: true });
+            if (this.collection.length == 0) {
+                this.collection.fetch(
+                    {
+                        data: {
+                            albumId: this.collection.albumId
+                        },
+                        reset: true
+                    }
+                );
+            }
         },
 
         onBeforeRender: function(){

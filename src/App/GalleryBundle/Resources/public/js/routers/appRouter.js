@@ -10,9 +10,9 @@ define([
         controller: GalleryController,
 
         appRoutes: {
-            "":                      "index",
-            "album/:id":             "album",
-            "album/:id/page/:page":  "album"
+            "":                      "albums",
+            "album/:id":             "images",
+            "album/:id/page/:page":  "images"
         }
 
     })

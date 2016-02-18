@@ -3,19 +3,19 @@ app_gallery_homepage:
     defaults: { _controller: AppGalleryBundle:Default:index }
 
 app_gallery_albums:
-    path:     /album/{album}
-    defaults: { _controller: AppGalleryBundle:Default:index }
+    path:     /album/{albumId}
+    defaults: { _controller: AppGalleryBundle:Default:images, page: 1 }
 
 app_gallery_albums_page:
-    path:     /album/{album}/page/{page}
-    defaults: { _controller: AppGalleryBundle:Default:index, page: 1 }
-
-app_gallery_rpc_images_get:
-    path:   /gallery/images/rpc/
-    defaults: { _controller: AppGalleryBundle:Default:rpcGetImages }
-    methods:  [GET]
+    path:     /album/{albumId}/page/{page}
+    defaults: { _controller: AppGalleryBundle:Default:images, page: 1 }
 
 app_gallery_rpc_albums_get:
     path:   /gallery/albums/rpc/
-    defaults: { _controller: AppGalleryBundle:Default:rpcGetAlbums }
+    defaults: { _controller: AppGalleryBundle:Default:index, format: 'json' }
+    methods:  [GET]
+
+app_gallery_rpc_images_get:
+    path:   /gallery/images/rpc/
+    defaults: { _controller: AppGalleryBundle:Default:images, albumId: 0, page: 1, format: 'json'  }
     methods:  [GET]
