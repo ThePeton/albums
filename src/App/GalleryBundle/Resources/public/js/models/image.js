@@ -1,11 +1,15 @@
-define(['backbone'], function(Backbone){
+define([
+    'backbone'
+], function(
+    Backbone
+){
     return Backbone.Model.extend({
 
         type: 'image',
 
         defaults: {
             src: '/upload/gallery/empty.jpg',
-            text: '(empty)',
+            description: '(empty)',
             order: 0
         }
 

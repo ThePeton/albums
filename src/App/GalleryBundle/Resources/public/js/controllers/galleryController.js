@@ -1,31 +1,42 @@
 define([
+    'gallery/views/galleryView',
     'gallery/collections/albumCollection',
-    'gallery/collections/imageCollection'
+    'gallery/collections/imageCollection',
+    'gallery/views/albumsCollectionView',
+    'gallery/views/imagesCollectionView'
 ], function(
+    GalleryView,
     AlbumCollection,
-    ImageCollection
+    ImageCollection,
+    AlbumsCollectionView,
+    ImagesCollectionView
 ){
+    return {
 
-    return function(view, router){
+        index: function(){
+            var pageAlbums = new AlbumCollection;
+            var view = new GalleryView;
 
-        index = function(){
-            var pageAlbums = new AlbumCollection();
-            view.clear().setCollection(pageAlbums);
-            view.setBackLink(false);
-        };
+            view.render();
+            $('#gallery-wrapper').empty().append(view.$el);
 
-        album = function(albumId, page){
+            view.getRegion('regionGallery').show( new AlbumsCollectionView({ collection: pageAlbums }) );
+        },
+
+        album: function(albumId, page){
             if (!page) {
                 page = 1;
             }
 
             var pageImages = new ImageCollection({albumId: albumId}, {state: {currentPage: parseInt(page)}});
-            view.clear().setCollection(pageImages);
-            view.setBackLink(true);
-        };
+            var view = new GalleryView;
 
-        view.listenTo(router, 'route:index', index);
-        view.listenTo(router, 'route:album', album);
+            view.render();
+            $('#gallery-wrapper').empty().append(view.$el);
+
+            view.getRegion('regionGallery').show( new ImagesCollectionView({ collection: pageImages }) );
+            $('#gallery-wrapper .back-link').show();
+        }
 
     }
 });

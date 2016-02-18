@@ -1,18 +1,19 @@
-define(['backbone'], function(Backbone){
-    return Backbone.Router.extend({
+define([
+    'marionette',
+    'gallery/controllers/galleryController'
+], function(
+    Marionette,
+    GalleryController
+){
+    return Marionette.AppRouter.extend({
 
-        routes: {
+        controller: GalleryController,
+
+        appRoutes: {
             "":                      "index",
             "album/:id":             "album",
             "album/:id/page/:page":  "album"
-        },
-
-        index: function(){
-            //
-        },
-
-        album: function(albumId, page){
-            //
         }
+
     })
 });

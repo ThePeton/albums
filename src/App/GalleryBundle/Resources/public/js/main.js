@@ -1,7 +1,8 @@
 define([
     'gallery/galleryApplication'
 ], function(
-    galleryApp
+    GalleryApp
 ){
+    var galleryApp = new GalleryApp;
     galleryApp.start();
 });

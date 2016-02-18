@@ -1,31 +1,24 @@
 define([
-    'jquery',
     'backbone',
+    'marionette',
     'gallery/routers/appRouter',
-    'gallery/views/galleryView',
-    'gallery/controllers/galleryController'
 ], function(
-    $,
     Backbone,
-    AppRouter,
-    GalleryView,
-    GalleryController
+    Marionette,
+    AppRouter
 ){
 
-    return {
-        router: null,
-        view: null,
-        controller: null,
+    return Marionette.Application.extend({
 
-        start: function(){
-            this.router = new AppRouter;
+        onStart: function(){
+            var router = new AppRouter;
 
-            this.view = new GalleryView;
-            this.view.setRouter(this.router);
-
-            this.controller = new GalleryController(this.view, this.router);
+            this.reqres.setHandler("getRouter", function(){
+                return router;
+            });
 
             Backbone.history.start({pushState: true});
         }
-    }
+
+    });
 });

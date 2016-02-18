@@ -1,26 +1,27 @@
 {
-  "name": "Gallery bundle",
-  "authors": [
-    "Peter Zaharia"
-  ],
-  "description": "",
-  "main": "",
-  "moduleType": [],
-  "license": "MIT",
-  "homepage": "",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jquery": "2.*",
-    "backbone": "^1.2.3",
-    "backbone.paginator": "2.*",
-    "requirejs": "2.*",
-    "bootstrap": "3.*"
-  }
+    "name": "Gallery bundle",
+    "authors": [
+        "Peter Zaharia"
+    ],
+    "description": "",
+    "main": "",
+    "moduleType": [],
+    "license": "MIT",
+    "homepage": "",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": "2.*",
+        "requirejs": "2.*",
+        "backbone": "^1.2.3",
+        "backbone.paginator": "2.*",
+        "marionette": "2.*",
+        "bootstrap": "3.*"
+    }
 }

@@ -1,33 +1,14 @@
 define([
-    'jquery',
-    'underscore',
-    'backbone'
+    'marionette'
 ], function(
-    $,
-    _,
-    Backbone
+    Marionette
 ){
-    return Backbone.View.extend({
+    return Marionette.ItemView.extend({
 
-        tagName: 'div',
+        template: '#template-album',
 
-        className: 'col-sm-4 col-md-3 col-lg-3',
-
-        initialize: function(){
-            this.listenTo(this.model, 'change', this.render);
-        },
-
-        render: function(){
-            var template = _.template($('#template-album').html());
-            this.$el.html(
-                template({
-                    name: this.model.get('name'),
-                    description: this.model.get('description'),
-                    previewImages: this.model.get('previewImages')
-                })
-            );
-
-            this.$el.find('.album-thumbnail').data('href', 'album/'+this.model.get('id'));
+        onRender: function(){
+            this.$el.find('.album-thumbnail').data('href', 'album/' + this.model.get('id'));
             return this;
         }
 

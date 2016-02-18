@@ -1,17 +1,13 @@
 define([
     'jquery',
-    'underscore',
-    'backbone'
+    'marionette'
 ], function(
     $,
-    _,
-    Backbone
+    Marionette
 ){
-    return Backbone.View.extend({
+    return Marionette.ItemView.extend({
 
-        tagName: 'div',
-
-        className: 'col-sm-4 col-md-3 col-lg-3',
+        template: '#template-image',
 
         events: {
             'click' : function(){
@@ -23,16 +19,6 @@ define([
                     $('#preview-image, #preview-image-overlay').hide();
                 });
             }
-        },
-
-        initialize: function(){
-            this.listenTo(this.model, 'change', this.render);
-        },
-
-        render: function(){
-            var template = _.template($('#template-image').html());
-            this.$el.html(template({src: this.model.get('src'), description: this.model.get('description')}));
-            return this;
         }
 
     });
